@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('title', 256);
             $table->text('content');
             $table->string('slug', 256);
+            $table->foreignId('user_id');
+            $table->foreignId('category_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }
