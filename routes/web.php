@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,10 @@ Route::get('/', function () {
 });
 
 Route::get('/blog', function () {
-    return view('blog');
+    $posts = DB::table('posts')->get();
+    return view('blog', ['posts' => $posts]);
 });
 
+Route::get('/blog/{slug}', function(string $slug) {
+    return view('post', ['slug' => $slug]);
+});

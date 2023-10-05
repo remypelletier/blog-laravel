@@ -1,0 +1,14 @@
+.blog {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.blog .card {
+    margin: 20px;
+    width: 22rem;
+    text-decoration: none;
+}
+
+.blog .card:hover {
+    background-color: aliceblue;
+}
