@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +25,6 @@ Route::get('/blog', function () {
 });
 
 Route::get('/blog/{slug}', function(string $slug) {
-    return view('post', ['slug' => $slug]);
+    $post = Post::where('slug', $slug)->get()->first();
+    return view('post', ['post' => $post]);
 });
