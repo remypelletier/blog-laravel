@@ -19,7 +19,19 @@
                 <div class="navbar-nav">
                   <a class="nav-link" href="/">Home</a>
                   <a class="nav-link" href="/blog">Articles</a>
-                  <a class="nav-link" href="#">login</a>
+                  @guest
+                  <a class="nav-link" href="{{route('auth.login')}}">login</a>
+                  @endguest
+                  @auth
+                  <p class="nav-link">
+                    Hello {{ \Illuminate\Support\Facades\Auth::user()->name }}
+                  </p>
+                    <form action="{{route('auth.logout')}}" method="post">
+                      @method('post')
+                      @csrf
+                      <button class="nav-link">Logout</button>
+                    </form>
+                  @endauth
                 </div>
               </div>
             </div>

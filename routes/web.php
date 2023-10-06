@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\Post;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +19,9 @@ use App\Models\Post;
 */
 
 Route::get('/', function () {
+
     return view('home');
-});
+})->name('home');
 
 Route::get('/blog', function () {
     $posts = DB::table('posts')->get();
@@ -28,3 +32,7 @@ Route::get('/blog/{slug}', function(string $slug) {
     $post = Post::where('slug', $slug)->get()->first();
     return view('post', ['post' => $post]);
 });
+
+Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('/login', [AuthController::class, 'authenticate'])->name('auth.authenticate');
+Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
