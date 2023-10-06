@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Barryvdh\Debugbar\Facades\Debugbar;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -28,7 +30,19 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $query = $request->validate([
+            'comment' => 'required',
+            'post' => 'required|int'
+        ]);
+
+        $commentOrm = new Comment([
+            'content' => $query['comment'],
+            'user_id' => Auth::user()->id,
+            'post_id' => $query['post']
+        ]);
+        $commentOrm->save();
+
+        return redirect()->back();
     }
 
     /**

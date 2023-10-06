@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\Post;
@@ -36,3 +37,4 @@ Route::get('/blog/{slug}', function(string $slug) {
 Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('auth.authenticate');
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+Route::post('/comment',[CommentController::class, 'store'])->name('comment');
